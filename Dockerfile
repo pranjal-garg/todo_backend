@@ -11,4 +11,5 @@ COPY . ./
 RUN ./mvnw clean package -DskipTests
 
 # Run the built application (the wildcard works if only one jar is in target/)
-CMD ["java", "-jar", "target/*.jar"]
+CMD ["java", "-jar", "target/todo-0.0.1-SNAPSHOT.jar"]
+
