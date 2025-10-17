@@ -4,6 +4,7 @@ import com.example.todo.models.UserModel;
 import org.springframework.stereotype.Repository;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
+import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 
 @Repository
@@ -17,6 +18,17 @@ public class UserRepository {
 
     public UserModel addUser(UserModel user) {
         userTable.putItem(user);
+        return user;
+    }
+
+    public UserModel getUserById(String uid) {
+        Key key = Key.builder().partitionValue(uid).sortValue("PROFILE").build();
+
+        return userTable.getItem(key);
+    }
+
+    public UserModel updateUser(UserModel user) {
+        userTable.updateItem(user);
         return user;
     }
 }
